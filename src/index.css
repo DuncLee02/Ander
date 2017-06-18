@@ -1,0 +1,134 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.menu {
+  margin: 30px;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+}
+
+.menuContainer{
+  font-size: 20px;
+  /*margin: 20;*/
+}
+
+.menuImageContainer{
+  align-items: center;
+  height: 50px;
+  width: 70px;
+}
+
+.menuImg{
+  height: 50px;
+  width: 50px;
+}
+
+.signInButton{
+  position: absolute;
+  top: 45px;
+  right: 30px;
+  height: 30px;
+  width: 80px;
+  background-color: white;
+  border-width: 2px;
+  border-color: #9ec4e5;
+  border-style: solid;
+}
+
+.anderMainContainer{
+  display: flex;
+  flex-direction: column;
+}
+
+.textBigBold{
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.textBig{
+  font-size: 25px;
+}
+
+.textSmall{
+  font-size: 14px;
+}
+
+.emailWrapper{
+  align-items: baseline;
+  margin-top: 30px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.emailInput{
+  display: inline-block;
+  width: 250px;
+  height: 45px;
+  border-width: 1px;
+  border-color: lightgrey;
+  border-style: solid;
+}
+
+.emailSubmitButton{
+  width: 85px;
+  height: 48px;
+  background-color: #9ec4e5;
+  border-width: 0px;
+}
+
+.emailSubmitButtonText{
+  color: white;
+  font-size: 17px;
+}
+
+.backgroundBox{
+  background-color: #f2f2f2;
+  margin: 30px;
+  /*display: flex;
+  flex-direction: column;
+  align-items: flex-start;*/
+}
+.innerBox{
+  margin: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.reasonsContainer{
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+}
+
+.reasonsContainerVertical{
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+}
+
+.reasonsComponent{
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.learnMoreButton{
+  height: 40px;
+  width: 100px;
+  background-color: #1c5176;
+  border-color: #9ec4e5;
+  border-style: none;
+}
+
+.learnMoreText{
+  color: white;
+  font-size: 13px;
+}
