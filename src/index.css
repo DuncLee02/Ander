@@ -76,7 +76,7 @@ body {
 
 .emailSubmitButton{
   width: 85px;
-  height: 48px;
+  height: 49px;
   background-color: #9ec4e5;
   border-width: 0px;
 }
@@ -116,7 +116,7 @@ body {
   margin: 20px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: stretch;
   text-align: left;
 }
 
@@ -128,7 +128,42 @@ body {
   border-style: none;
 }
 
+.reasonsImage{
+  height: 100px;
+  width: 100px;
+}
+
 .learnMoreText{
   color: white;
   font-size: 13px;
+}
+
+.dividerLine{
+  width: 5px;
+  background-color: #1f5077;
+}
+
+.dividerLineHorizontle{
+  height: 5px;
+  background-color: #2f78b2;
+  width: 200px;
+}
+
+.flexRow{
+  display: flex;
+  flex-direction: row;
+}
+
+.flexVertical{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.numbers{
+  height: 40px;
+  width: 40px;
+  margin-top: 30px;
+  margin-right: 20px;
 }

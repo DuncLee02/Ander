@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import AnderPage from './Ander.js';
 import ParkPage from './Park.js'
+import RentPage from './Rent.js'
+import HostPage from './Host.js'
 
 class Menu extends Component {
 
@@ -18,10 +20,10 @@ class Menu extends Component {
       <div>
     <div className='menu'>
       <div className='menuImageContainer'>
-        <img className='menuImg' src={require('../Assets/MenuButton.png')} alt={'Menu'} />
+        <img className='menuImg' src={require('../Assets/Menu.png')} alt={'Menu'} />
       </div>
       <div className='menuImageContainer'>
-        <img className='menuImg' src={require('../Assets/AnderLogo.png')} alt={'Ander'} />
+        <img className='menuImg' src={require('../Assets/Ander.png')} alt={'Ander'} />
       </div>
 
     {languages.map(function (name, index) {
@@ -57,12 +59,19 @@ class Menu extends Component {
 
   getPage() {
     console.log(this.state.selectedSection)
-    if (this.state.selectedSection == 'ander') {
-      return <AnderPage/>
+    if (this.state.selectedSection === 'ander') {
+      return <AnderPage sectionChangeHandler={this.updatePage.bind(this)}/>
     }
-    if (this.state.selectedSection == 'Park') {
-      return <ParkPage/>
+    if (this.state.selectedSection === 'Park') {
+      return <ParkPage sectionChangeHandler={this.updatePage.bind(this)}/>
     }
+    if (this.state.selectedSection === 'Rent') {
+      return <RentPage sectionChangeHandler={this.updatePage.bind(this)}/>
+    }
+    if (this.state.selectedSection === 'Host') {
+      return <HostPage sectionChangeHandler={this.updatePage.bind(this)}/>
+    }
+
   }
 
 }
