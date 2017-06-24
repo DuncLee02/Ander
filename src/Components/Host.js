@@ -14,7 +14,6 @@ class Host extends Component {
     return (
       <div className='anderMainContainer' style={{'textAlign': 'left', 'marginLeft': 80, 'marginRight': 80}}>
         <text className='textBigBold'> Benefit by becoming a parking host today </text>
-        <br/>
         <text className='textBig'> List your parking space or lot as one of our designated parking spaces for car-owners. You help streamline the car handoff process </text>
         <br/>
 
