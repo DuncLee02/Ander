@@ -4,7 +4,7 @@ class Park extends Component {
   render() {
     return (
       <div className='anderMainContainer'>
-        <div style={{'margin': 50}}>
+        <div style={{'marginLeft': 80, 'marginRight': 80, 'textAlign': 'left'}}>
           <text className='textBigBold' style={{'alignSelf': 'center'}}> Browse our listings and find affordable car rentals near you </text><br/>
           <text className='textBig' style={{'alignSelf': 'center', 'maxWidth':200, 'width': '100%'}}> Learn more about how it works below and gain access to rentals up to 30 percent cheaper than traditional rentals </text>  <br/>
         </div>
@@ -88,7 +88,7 @@ class Park extends Component {
           <text className='textBig'> We offer comprehensive insurance coverage and options </text>
 
           <div className='flexRow' style={{'justifyContent': 'space-around', 'marginTop':50}}>
-            <div className='flexVertical'>
+            <div className='flexVertical' style={{'justifyContent': 'flex-start'}}>
               <div className='flexRow' style={{'justifyContent': 'center', 'float': 'left', 'width': '80%'}}>
                 <img alt='' className='reasonsImage' src={require('../Assets/Vault.png')}/>
                 <div className='flexVertical' style={{'marginLeft': 20, 'minHeight': 160}}>
@@ -96,13 +96,13 @@ class Park extends Component {
                   <text style={{'maxWidth': 400}} > Our coverage options offer comprehensive protection from potential liability. Learn more about your options by clicking below </text>
                 </div>
               </div>
-              <button className='learnMoreButton' style={{'marginTop':50, 'alignSelf': 'center'}}>
+              <button className='learnMoreButton' onClick={this.learnMorePolicies.bind(this)} style={{'marginTop':50, 'alignSelf': 'center'}}>
                 <text className='learnMoreText'>  Learn More </text>
               </button>
             </div>
 
             <div className='flexRow' style={{'justifyContent': 'center', 'float': 'right'}}>
-              <div className='flexVertical'>
+              <div className='flexVertical' style={{'justifyContent': 'flex-start'}}>
                 <div className='flexRow' style={{'justifyContent': 'center', 'float': 'left', 'width': '80%'}}>
                   <img alt='' className='reasonsImage' src={require('../Assets/Microscope.png')}/>
                   <div className='flexVertical' style={{'marginLeft': 20, 'minHeight': 160}}>
@@ -124,6 +124,11 @@ class Park extends Component {
 
     );
   }
+
+  learnMorePolicies() {
+    this.props.sectionChangeHandler('Trust')
+  }
+
 }
 
 export default Park;

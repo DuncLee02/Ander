@@ -91,8 +91,8 @@ class Ander extends Component {
                 <img alt='' className='reasonsImage' src={require('../Assets/Handshake.png')}/>
                 <text className='textBigBold'> Become a hub for local car sharing </text>
                 <text> Increase customer traffic by turning your parking space into a centralized hub for enabling affordable parking and renting </text><br/>
-                <button className='learnMoreButton'>
-                  <text className='learnMoreText' onClick={this.learnMoreHost.bind(this)}> Learn More </text>
+                <button className='learnMoreButton' onClick={this.learnMoreHost.bind(this)}>
+                  <text className='learnMoreText'> Learn More </text>
                 </button>
               </div>
             </div>
@@ -108,7 +108,7 @@ class Ander extends Component {
               <div className= 'reasonsComponent' style={{'marginTop': 0}}>
                 <text className='textBigBold'> Car owner or renter? </text>
                 <text style={{'maxWidth': 500}} > We got you covered. Park and drive knowing our insurance policy is comprehensive. Learn more about our insurance policies by clicking below </text>
-                <button className='learnMoreButton' style={{'marginTop': 30}}>
+                <button className='learnMoreButton' style={{'marginTop': 30}} onClick={this.learnMorePolicies.bind(this)}>
                   <text className='learnMoreText'> Learn More </text>
                 </button>
               </div>
@@ -119,7 +119,7 @@ class Ander extends Component {
               <div className= 'reasonsComponent' style={{'marginTop': 0}}>
                 <text className='textBigBold'> Parking space owner? </text>
                 <text style={{'maxWidth': 500}}> We know you may be concerned about legal issues or liability. We’ve got it figured out, and will take care of it. Learn more about how we are helping and safeguarding your business by clicking below </text>
-                <button className='learnMoreButton' style={{'marginTop': 30}}>
+                <button className='learnMoreButton' style={{'marginTop': 30}} onClick={this.learnMorePolicies.bind(this)}>
                   <text className='learnMoreText'> Learn More </text>
                 </button>
               </div>
@@ -140,6 +140,9 @@ class Ander extends Component {
             </div>
           </div>
         </div>
+
+
+
 
       </div>
     );
@@ -163,6 +166,10 @@ class Ander extends Component {
 
   learnMoreHost(){
     this.props.sectionChangeHandler('Host')
+  }
+
+  learnMorePolicies() {
+    this.props.sectionChangeHandler('Trust')
   }
 
 

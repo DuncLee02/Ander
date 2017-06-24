@@ -3,6 +3,7 @@ import AnderPage from './Ander.js';
 import ParkPage from './Park.js'
 import RentPage from './Rent.js'
 import HostPage from './Host.js'
+import TrustPage from './Trust.js'
 
 class Menu extends Component {
 
@@ -39,7 +40,7 @@ class Menu extends Component {
       )
     }, this)}
     <button className='signInButton'>
-      <text> Sign Up </text>
+      <text style={{'fontSize': 15}}> Sign Up </text>
     </button>
     </div>
 
@@ -50,6 +51,7 @@ class Menu extends Component {
   }
 
   updatePage(sectionName) {
+    window.scrollTo(0, 0)
     this.setState(function() {
       return {
         selectedSection: sectionName
@@ -70,6 +72,9 @@ class Menu extends Component {
     }
     if (this.state.selectedSection === 'Host') {
       return <HostPage sectionChangeHandler={this.updatePage.bind(this)}/>
+    }
+    if(this.state.selectedSection === 'Trust') {
+      return <TrustPage sectionChangeHandler={this.updatePage.bind(this)}/>
     }
 
   }
