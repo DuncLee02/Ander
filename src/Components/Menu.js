@@ -39,8 +39,8 @@ class Menu extends Component {
         </div>
       )
     }, this)}
-    <button className='signInButton'>
-      <text style={{'fontSize': 15}}> Sign Up </text>
+    <button className='signInButton' onClick={this.switchToSignIn.bind(this)}>
+      <span style={{'fontSize': 15}}> Sign Up </span>
     </button>
     </div>
 
@@ -77,6 +77,11 @@ class Menu extends Component {
       return <TrustPage sectionChangeHandler={this.updatePage.bind(this)}/>
     }
 
+  }
+
+  switchToSignIn() {
+    console.log("switching to sign in")
+    this.props.changeMainPage('Search')
   }
 
 }

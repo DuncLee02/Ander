@@ -10,7 +10,6 @@ class Trust extends Component {
   }
 
   render() {
-    var languages = ['ander', 'Park', 'Rent', 'Host']
 
     return (
       <div className ='anderMainContainer' >
