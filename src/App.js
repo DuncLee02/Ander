@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Info from './Components/Menu.js';
 import './App.css';
-import SearchMenu from './Components/SearchMenu.js'
+import SearchMenu from './Components/Search/SearchMenu.js'
+import UserSearch from './Components/UserSearch/Menu.js'
 
 class App extends Component {
 
@@ -37,7 +38,9 @@ class App extends Component {
     if (this.state.pageRendered === 'Search') {
       return <SearchMenu changeMainPage={this.updatePage.bind(this)}/>
     }
-
+    if (this.state.pageRendered === 'UserPage') {
+      return <UserSearch changeMainPage={this.updatePage.bind(this)}/>
+    }
   }
 
 }
