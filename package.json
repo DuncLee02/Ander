@@ -10,11 +10,11 @@
     "react-onclickoutside": "^6.4.0"
   },
   "devDependencies": {
+    "cheerio": "latest",
+    "express": "latest",
     "gh-pages": "^1.0.0",
     "react-scripts": "1.0.7",
-    "express": "latest",
-    "request": "latest",
-    "cheerio": "latest"
+    "request": "latest"
   },
   "scripts": {
     "start": "react-scripts start",

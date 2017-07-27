@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom'
+import firebase from '../../../firebase.js'
 
 import PlaceDropdown from './SearchPlacePicker.js'
 import CarTypeDropdown from './SearchCarTypePicker.js'
@@ -7,6 +8,9 @@ import CarTypeDropdown from './SearchCarTypePicker.js'
 
 import 'react-day-picker/lib/style.css';
 import DayPicker, { DateUtils } from 'react-day-picker';
+
+import RentalCar from '../../../Objects/RentalCar.js'
+import Global from '../../../Globals.js'
 
 let dateFormat = require('dateformat');
 
@@ -22,6 +26,7 @@ class SearchBar extends Component {
       airportPickerVisible: false,
       airportInputText: 'any airport',
       carPickerVisible: false,
+      carInputText: 'car type',
       from: null,
       to: null,
     }
@@ -39,6 +44,8 @@ class SearchBar extends Component {
 
     this.changePlacePickerText = this.changePlacePickerText.bind(this)
     this.changeCarPickerText = this.changeCarPickerText.bind(this)
+
+    this.searchButtonClicked = this.searchButtonClicked.bind(this)
   }
 
 
@@ -115,9 +122,9 @@ class SearchBar extends Component {
           </div>
           <div className='searchInputContainer' style={{'borderLeft': 0, 'borderRight': 0}}>
             <text className='searchText'> What type? </text>
-            <input className='searchInput' onChange={this.onCarTextChange} type='text' placeholder='check and see' onClick={this.showCarPicker} value={this.state.carInputText}/>
+            <input className='searchInput' onChange={this.onCarTextChange} type='text' placeholder='check and see' onClick={this.showCarPicker} value={this.state.carInputText} readOnly/>
           </div>
-          <div className='searchInputContainer' style={{'borderLeft': 0, 'borderTopRightRadius': 5, 'borderBottomRightRadius': 5 , 'width': 100}}>
+          <div className='searchInputContainer' onClick={this.searchButtonClicked} style={{'borderLeft': 0, 'borderTopRightRadius': 5, 'borderBottomRightRadius': 5 , 'width': 100}}>
             <button className='searchButton'> Search </button>
           </div>
 
@@ -132,10 +139,26 @@ class SearchBar extends Component {
             />
             </div>
           }
-          {this.state.airportPickerVisible && <PlaceDropdown changePlacePickerText={this.changePlacePickerText}/>}
-          {this.state.carPickerVisible && <CarTypeDropdown changeCarPickerText={this.changeCarPickerText}/>}
+          {this.state.airportPickerVisible && <PlaceDropdown textInput={this.state.airportInputText} changePlacePickerText={this.changePlacePickerText}/>}
+          {this.state.carPickerVisible && <div className='carPickerContainer'>
+            <CarTypeDropdown changeCarPickerText={this.changeCarPickerText}/>
+            </div>}
         </div>
     );
+  }
+
+  searchButtonClicked() {
+    if (this.state.airportInputText == "airport") {
+      return
+    }
+    firebase.database().ref("rentals/" + this.state.airportInputText ).once('value', function(snapshot) {
+      console.log(snapshot.val())
+      var dateRange = snapshot.val().dates
+      var model = snapshot.val().model
+      var airport = snapshot.key
+      var fetchedCar = new RentalCar(airport, dateRange, model)
+      Global.RentalCars.push(fetchedCar)
+    });
   }
 
   changeCarPickerText(text) {
@@ -182,6 +205,11 @@ class SearchBar extends Component {
   }
 
   showAirportPicker() {
+    if (this.state.airportInputText == "any airport") {
+      this.setState({
+        airportInputText: ""
+      })
+    }
     this.setState({
       airportPickerVisible: true,
       dateVisible: false,
@@ -207,7 +235,6 @@ class SearchBar extends Component {
       carPickerVisible: false
     })
   }
-
 
 }
 

@@ -202,7 +202,8 @@ body {
   border-width: 1px;
   border-color: lightgrey;
   border-style: solid;
-  margin: 30px;
+  background-color: white;
+  margin-top: 30px;
 }
 
 .searchAnderLogo{
@@ -235,7 +236,7 @@ body {
   /*background-color: 'rgba(0, 0, 0, 1.0)'*/
 }
 
-.searchModal {
+.loginModal {
   overflow: hidden;
   width: 600px;
   height: 300px;
@@ -250,6 +251,24 @@ body {
   margin-left: -300px;
   margin-top: -150px;
   opacity: 1.0;
+}
+
+.leaseModal {
+  overflow: hidden;
+  width: 600px;
+  height: 500px;
+  background-color: white;
+  outline:none;
+  border-width: 2px;
+  border-color: lightGrey;
+  border-style: solid;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -300px;
+  margin-top: -250px;
+  opacity: 1.0;
+  overflow-y: auto;
 }
 
 .searchInput {
@@ -293,8 +312,6 @@ body {
   width: 800px;
   align-self: center;
   margin-right: 50px;
-  opacity: 0;
-  transition: opacity 0.5s;
   opacity: 1;
 }
 
@@ -336,8 +353,8 @@ body {
 
 .carPickerContainer {
   height: 400px;
-  width: 40%;
-  margin-left: 61%;
+  width: 50%;
+  margin-left: 58%;
   flex-direction: column;
   display: flex;
 }
@@ -366,4 +383,28 @@ body {
   border-style: solid;
   border-color: darkGrey;
   background-color: white;
+}
+
+.leaseCalendar {
+  height: 300px;
+  width: 600px;
+  opacity: 1;
+}
+
+.modelPickerImage {
+  height: 90px;
+  width: 90px;
+}
+
+.modelPickerContainer {
+    display: flex;
+    flex-direction: column;
+    height: 100px;
+    width: 150px;
+    border-style: solid;
+    border-color: lightGrey;
+    margin: 5px;
+}
+.modelPickerContainer:hover {
+  background-color: lightGrey;
 }

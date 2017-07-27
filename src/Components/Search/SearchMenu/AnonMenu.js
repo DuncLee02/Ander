@@ -1,13 +1,11 @@
 import React, { Component } from 'react'
-import SearchBar from '../Search/SearchBar.js'
+import SignUp from './SearchSignUp.js'
 
+import Global from '../../../Globals.js'
 import Modal from 'react-modal'
-import Global from '../../Globals.js'
 
 
 class SearchMenu extends Component {
-
-  user = null
 
   constructor(props) {
     super(props)
@@ -25,16 +23,13 @@ class SearchMenu extends Component {
       <div className ='flexVertical' >
         <div className = 'searchMenu'>
           <div className='searchAnderLogo'>
-            <img className='menuImg' src={require('../../Assets/Ander.png')} alt={'Menu'} />
+            <img className='menuImg' src={require('../../../Assets/Ander.png')} alt={'Menu'} />
           </div>
           <div className='searchMenuItem' onClick={this.toggleSignIn.bind(this)}>
-            <text className='textSmall'> Reserve a Car </text>
+            <text className='textSmall'> Log In </text>
           </div>
           <div className='searchMenuItem' onClick={this.toggleSignUp.bind(this)}>
-            <text className='textSmall'> Lease your Car </text>
-          </div>
-          <div className='searchMenuItem' onClick={this.toggleSignUp.bind(this)}>
-            <text className='textSmall'> Messages </text>
+            <text className='textSmall'> Sign Up </text>
           </div>
           <div className='searchMenuItem'>
             <text className='textSmall'> help </text>
@@ -44,10 +39,25 @@ class SearchMenu extends Component {
           </div>
         </div>
 
-        <text className='searchTitle'> Ander </text> <br/>
-        <text className='searchDescription'> rent or park at a location near you </text> <br/>
+        <Modal
+        isOpen={this.state.logInVisible}
+        contentLabel="Modal"
+        className='loginModal'
+        overlayClassName='modal-overlay'
+        onRequestClose={this.toggleSignIn.bind(this)}
+        >
+          <SignUp userCallback={this.userCallback}/>
+        </Modal>
 
-        <SearchBar id='SearchBar'/>
+        <Modal
+        isOpen={this.state.signUpVisible}
+        contentLabel="Modal"
+        className='loginModal'
+        overlayClassName='modal-overlay'
+        onRequestClose={this.toggleSignUp.bind(this)}
+        >
+          <SignUp userCallback={this.userCallback}/>
+        </Modal>
 
 
 
@@ -74,11 +84,13 @@ class SearchMenu extends Component {
   }
 
   userCallback(aUser) {
-    this.user = {name: aUser.displayName, email: aUser.email, uid: aUser.uid}
+    Global.user = {name: aUser.displayName, email: aUser.email, uid: aUser.uid}
     this.setState({
       logInVisible: false,
       signUpVisible: false,
     })
+    console.log('signing in...')
+    this.props.signIn(true)
   }
 
 

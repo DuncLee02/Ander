@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import firebase from '../../firebase.js'
+import firebase from '../../../firebase.js'
 
 class SignUp extends Component {
 
@@ -20,7 +20,7 @@ class SignUp extends Component {
         <div className='flexVertical' style={{'alignItems': 'center', 'marignTop': 50, 'opacity': 1}}>
 
           <button className='signInGoogleButton' onClick={this.googleSignUpClicked}>
-            <img src={require('../../Assets/GoogleSymbol.png')} alt={'Menu'} style={{'height': 30, 'width': 30}}/>
+            <img src={require('../../../Assets/GoogleSymbol.png')} alt={'Menu'} style={{'height': 30, 'width': 30}}/>
             <text className='textBig'> Continue with Google </text>
           </button>
         </div>
@@ -33,16 +33,47 @@ class SignUp extends Component {
   //
   // <input className='signInInput' type='text' placeholder='confirm password' style={{'textAlign':'center', 'fontSize': 17, 'marginTop': 0 }} />
 
+  // googleSignUpClicked() {
+  //   var provider = new firebase.auth.GoogleAuthProvider();
+  //
+  //   firebase.auth().signInWithPopup(provider).then(function(result) {
+  //     var token = result.credential.accessToken;
+  //     this.props.userCallback(result.user)
+  //
+  //      firebase.database().ref('users/' + result.user.uid).set({
+  //        username: result.user.displayName,
+  //        email: result.user.email,
+  //        uid: result.user.uid,
+  //       });
+  //   }.bind(this)).catch(function(error) {
+  //     console.log(error)
+  //     var errorCode = error.code;
+  //     var errorMessage = error.message;
+  //     var email = error.email;
+  //     var credential = error.credential;
+  //   });
+  //
+  // }
+
   googleSignUpClicked() {
     var provider = new firebase.auth.GoogleAuthProvider();
 
     firebase.auth().signInWithPopup(provider).then(function(result) {
       var token = result.credential.accessToken;
       this.props.userCallback(result.user)
-      firebase.database().ref('users/' + result.user.uid).set({
-        username: result.user.displayName,
-        email: result.user.email,
-        uid: result.user.uid,
+      firebase.database().ref('users/' + result.user.uid).once('value', function(snapshot) {
+        var exists = (snapshot.val() !== null);
+        if (exists) {
+          console.log('already exists...')
+        }
+        else {
+          console.log('doesnt exist')
+          firebase.database().ref('users/' + result.user.uid).set({
+            username: result.user.displayName,
+            email: result.user.email,
+            uid: result.user.uid,
+          });
+        }
       });
     }.bind(this)).catch(function(error) {
       console.log(error)

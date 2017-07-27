@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import SignIn from './SearchSignIn.js'
 import SignUp from './SearchSignUp.js'
-import SearchBar from './SearchBar.js'
 
 import Global from '../../Globals.js'
 import Modal from 'react-modal'
@@ -40,11 +39,6 @@ class SearchMenu extends Component {
             <text className='textSmall'> Learn More </text>
           </div>
         </div>
-
-        <text className='searchTitle'> Ander </text> <br/>
-        <text className='searchDescription'> rent or park at a location near you </text> <br/>
-
-        <SearchBar id='SearchBar'/>
 
         <Modal
         isOpen={this.state.logInVisible}
@@ -96,8 +90,6 @@ class SearchMenu extends Component {
       logInVisible: false,
       signUpVisible: false,
     })
-    console.log(Global.user)
-    this.props.changeMainPage('UserPage')
   }
 
 
