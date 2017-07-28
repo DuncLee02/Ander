@@ -1,15 +1,19 @@
 import React, { Component } from 'react';
+
 import Info from './Components/Menu.js';
 import './App.css';
-import SearchMenu from './Components/SearchMenu.js'
+import SearchBase from './Components/Search/SearchBase.js'
+
 
 class App extends Component {
+
 
   constructor(props) {
     super(props)
     this.state = {
-      pageRendered: 'Info',
+      pageRendered: 'Search',
     }
+    this.changeMainPage = this.changeMainPage.bind(this)
   }
 
   render() {
@@ -20,24 +24,21 @@ class App extends Component {
     );
   }
 
-  updatePage(sectionName) {
-    window.scrollTo(0, 0)
-    this.setState(function() {
-      return {
-        pageRendered: sectionName
-      }
-    });
+
+  changeMainPage(section) {
+    this.setState({
+      pageRendered: section
+    })
   }
 
   getPage() {
     console.log(this.state.selectedSection)
     if (this.state.pageRendered === 'Info') {
-      return <Info changeMainPage={this.updatePage.bind(this)}/>
+      return <Info changeMainPage={this.changeMainPage}/>
     }
     if (this.state.pageRendered === 'Search') {
-      return <SearchMenu changeMainPage={this.updatePage.bind(this)}/>
+      return <SearchBase changeMainPage={this.changeMainPage}/>
     }
-
   }
 
 }
