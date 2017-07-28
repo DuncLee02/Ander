@@ -19,9 +19,9 @@ class RentalPage extends Component {
   componentDidMount() {
     console.log(this.props.location.pathname)
     let arr = this.props.location.pathname.split('/')
-    const airport = arr[2]
+    const airport = arr[3]
     console.log("airport: " + airport)
-    const uid = arr[3]
+    const uid = arr[4]
     console.log('uid: ' + uid)
     firebase.database().ref('rentals/' + airport + '/' + uid).on('value', (snap) => {
       console.log(snap.val())
