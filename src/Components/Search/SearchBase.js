@@ -70,7 +70,7 @@ class Base extends Component {
         {this.getMenu()}
         <BrowserRouter>
           <div>
-            <Route exact path='/' component={this.SearchPage}/>
+            <Route exact path='/ander' component={this.SearchPage}/>
             <Route path='/rentals/' component={RentalCarPage}/>
           </div>
         </BrowserRouter>
