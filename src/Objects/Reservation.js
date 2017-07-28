@@ -1,6 +1,6 @@
 
 class RentalCar {
-  constructor(airport, to, from, type, uid, year, make, model) {
+  constructor(airport, to, from, type, uid, year, make, model, starts) {
     this.airport = airport
     this.type = type
     this.to = to
@@ -10,6 +10,8 @@ class RentalCar {
     this.year = year
     this.make = make
     this.model = model
+    this.reservationStarts = starts
+    this.reservationEnds = ends
   }
 }
 

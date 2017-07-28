@@ -195,17 +195,6 @@ body {
   margin-right: 20px;
 }
 
-.signInInput{
-  display: inline-block;
-  width: 400px;
-  height: 30px;
-  border-width: 1px;
-  border-color: lightgrey;
-  border-style: solid;
-  background-color: white;
-  margin-top: 30px;
-}
-
 .searchAnderLogo{
   position: absolute;
   top: 5px;
@@ -365,7 +354,7 @@ body {
 }
 
 .airportPickerText:hover {
-    background-color: lightGrey;
+  background-color: lightGrey;
 }
 .airportPickerText:active {
   background-color: #9cc1e2;
@@ -405,6 +394,126 @@ body {
     border-color: lightGrey;
     margin: 5px;
 }
+
 .modelPickerContainer:hover {
   background-color: lightGrey;
+}
+
+.resultCarContainer{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 300px;
+  width: 300px;
+  cursor: pointer;
+}
+.resultCarImage {
+  height: 150px;
+  width: 200px;
+}
+
+.createCarInput{
+  display: inline-block;
+  width: 400px;
+  height: 30px;
+  border-width: 1px;
+  border-color: lightgrey;
+  border-style: solid;
+  background-color: white;
+  margin-top: 30px;
+}
+
+.createCarModelInput {
+  display: inline-block;
+  width: 150px;
+  height: 30px;
+  border-width: 1px;
+  border-color: lightgrey;
+  border-style: solid;
+  background-color: white;
+  margin: 10px;
+  margin-top: 30px;
+}
+
+.rentalCarTopImage {
+  width: 40%;
+  overflow: hidden;
+  align-self: center;
+}
+
+.rentalCarTitle {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: left;
+  margin-left: 20px;
+}
+
+.rentalInfoContainer {
+  display: flex;
+  flex-direction: row;
+  align-content: space-around;
+}
+
+.rentalCarLoading{
+  align-self: center;
+}
+
+.rentalPanelContainer {
+  position: fixed;
+  top: 50px;
+  right: 10px;
+  display: flex;
+  flex-direction: column;
+  height: 400px;
+  width: 300px;
+  opacity: 0.8;
+  border-style: solid;
+  border-color: darkGrey;
+  z-index: 5;
+  align-items: center;
+}
+
+.rentalPanelTitleBox {
+  background-color: darkGrey;
+  color: white;
+}
+
+.rentalPanelDatePickerInput {
+  display: inline-block;
+  width: 250px;
+  height: 30px;
+  border-width: 1px;
+  border-color: lightgrey;
+  border-style: solid;
+  background-color: white;
+  margin-top: 30px;
+}
+
+.rentalPanelCalendar {
+  border-width: 1px;
+  border-color: black;
+  background-color: white;
+  height: 300px;
+  width: 600px;
+  position: absolute;
+  top: 80px;
+  right: -20px;
+  opacity: 1;
+}
+
+.rentalPanelPriceBox {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  border-top-width: 1px;
+  border-top-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-color: lightGrey;
+  width: 90%;
+  height: 30px;
+  margin-top: 15px;
+  font-size: 17px;
+  font-weight: normal;
 }

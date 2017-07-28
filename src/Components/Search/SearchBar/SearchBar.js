@@ -143,22 +143,36 @@ class SearchBar extends Component {
           {this.state.carPickerVisible && <div className='carPickerContainer'>
             <CarTypeDropdown changeCarPickerText={this.changeCarPickerText}/>
             </div>}
+
         </div>
     );
   }
 
   searchButtonClicked() {
+    console.log('clicked...')
     if (this.state.airportInputText == "airport") {
       return
     }
-    firebase.database().ref("rentals/" + this.state.airportInputText ).once('value', function(snapshot) {
-      console.log(snapshot.val())
-      var dateRange = snapshot.val().dates
-      var model = snapshot.val().model
-      var airport = snapshot.key
-      var fetchedCar = new RentalCar(airport, dateRange, model)
-      Global.RentalCars.push(fetchedCar)
-    });
+    console.log('pinging firebase')
+    firebase.database().ref("rentals/" + this.state.airportInputText ).on('value', (snap) => {
+      // get children as an array
+      console.log(snap.val())
+      var items = [];
+      snap.forEach((child) => {
+        const airport = child.val().airport
+        const to = child.val().to
+        const from = child.val().from
+        const type = child.val().type
+        const uid = child.key
+        const year = child.val().year
+        const make = child.val().make
+        const model = child.val().model
+
+        const newCar = new RentalCar(airport, to, from, type, uid, year, make, model)
+        Global.RentalCars.push(newCar)
+      });
+      this.props.updateResults()
+    })
   }
 
   changeCarPickerText(text) {

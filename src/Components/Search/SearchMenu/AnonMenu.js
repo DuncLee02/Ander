@@ -83,8 +83,7 @@ class SearchMenu extends Component {
     })
   }
 
-  userCallback(aUser) {
-    Global.user = {name: aUser.displayName, email: aUser.email, uid: aUser.uid}
+  userCallback() {
     this.setState({
       logInVisible: false,
       signUpVisible: false,

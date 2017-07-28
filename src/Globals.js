@@ -1,5 +1,5 @@
 
 module.exports = {
-  user: null,
+  User: null,
   RentalCars: [],
 };

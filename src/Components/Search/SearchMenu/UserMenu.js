@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Modal from 'react-modal'
 import Global from '../../../Globals.js'
 
-import LeaseModal from '../../UserPages/LeaseCar.js'
+import LeaseModal from '../../AdminPages/CreateCar.js'
 
 
 
@@ -34,9 +34,7 @@ class SearchMenu extends Component {
           <div className='searchMenuItem' >
             <text className='textSmall'> Cars Reserved </text>
           </div>
-          <div className='searchMenuItem' >
-            <text className='textSmall' onClick={this.openLeaseModal}> Lease your Car </text>
-          </div>
+          {this.checkIfAdmin()}
           <div className='searchMenuItem' >
             <text className='textSmall'> Messages </text>
           </div>
@@ -63,6 +61,18 @@ class SearchMenu extends Component {
 
       </div>
     );
+  }
+
+  checkIfAdmin() {
+    if (Global.User.admin) {
+      console.log(Global.User)
+      console.log(Global.User.admin)
+      return (
+        <div className='searchMenuItem' >
+          <text className='textSmall' onClick={this.openLeaseModal}> Create Car </text>
+        </div>
+      )
+    }
   }
 
   openLeaseModal() {

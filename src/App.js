@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+
 import Info from './Components/Menu.js';
 import './App.css';
 import SearchBase from './Components/Search/SearchBase.js'
+
 
 class App extends Component {
 

@@ -23,8 +23,12 @@ class LeaseModal extends Component {
       dateInputText: "Rent – Dropoff",
       datePickerVisible: false,
 
-      modelInputText: "car-type",
-      modelPickerVisible: false,
+      typeInputText: "car-type",
+      typePickerVisible: false,
+
+      year: "",
+      make: "",
+      model: "",
 
       errorLabel: "",
       loading: false
@@ -43,6 +47,10 @@ class LeaseModal extends Component {
     this.removeDatePicker = this.removeDatePicker.bind(this)
 
     this.submitButtonPressed = this.submitButtonPressed.bind(this)
+
+    this.modelChanged = this.modelChanged.bind(this)
+    this.yearChanged = this.yearChanged.bind(this)
+    this.makeChanged = this.makeChanged.bind(this)
   }
 
   // componentDidMount() {
@@ -73,13 +81,13 @@ class LeaseModal extends Component {
 
     return (
         <div className='flexVertical' id='modalBackground' style={{'alignItems': 'center', 'marignTop': 50}}>
-          <input className='signInInput' type='text' onClick={this.showAirportPicker} onChange={this.onAirportChange} value={this.state.airportInputText} style={{'textAlign':'center', 'fontSize': 17}} />
+          <input className='createCarInput' type='text' onClick={this.showAirportPicker} onChange={this.onAirportChange} value={this.state.airportInputText} style={{'textAlign':'left', 'fontSize': 17}} />
           {this.state.airportPickerVisible && <PlaceDropdown textInput={this.state.airportInputText} changePlacePickerText={this.changeAirportPickerText}/>}
 
-          <button className='signInInput' style={{'textAlign':'center', 'fontSize': 17}} onClick={this.showDatePicker}>
+          <button className='createCarInput' style={{'textAlign':'left', 'fontSize': 17}} onClick={this.showDatePicker}>
             <text> {this.state.dateInputText} </text>
-
           </button>
+
           {this.state.datePickerVisible && <div className='leaseCalendar'>
             <DayPicker
             numberOfMonths={2}
@@ -90,16 +98,22 @@ class LeaseModal extends Component {
           </div>
           }
 
-          <input className='signInInput' type='text'  onClick={this.showModelPicker} onChange={this.onModelChange} value={this.state.modelInputText} style={{'textAlign':'center', 'fontSize': 17}} />
-          {this.state.modelPickerVisible && <div style={{'width': 500}}>
+          <input className='createCarInput' type='text'  onClick={this.showModelPicker} onChange={this.onModelChange} value={this.state.typeInputText} style={{'textAlign':'left', 'fontSize': 17}} readOnly/>
+          {this.state.typePickerVisible && <div style={{'width': 500}}>
             <CarTypeDropdown changeCarPickerText={this.changeModelPickerText}/>
           </div>}
+
+          <div className={'flexRow'}>
+            <input className='createCarModelInput' onChange={this.yearChanged} type='text' placeholder='year' style={{'textAlign':'left', 'fontSize': 17}} />
+            <input className='createCarModelInput' onChange={this.makeChanged} type='text' placeholder='make' style={{'textAlign':'left', 'fontSize': 17}} />
+            <input className='createCarModelInput' onChange={this.modelChanged} type='text' placeholder='model' style={{'textAlign':'left', 'fontSize': 17}} />
+          </div>
 
           <button className='emailSubmitButton' style={{'marginTop': 30}} onClick={this.submitButtonPressed}>
             <text className='textBig'> submit </text>
           </button>
 
-          <text> {this.state.errorLabel} </text>
+          <text style={{'color': 'red', 'marginTop': 15}}> {this.state.errorLabel} </text>
           {this.state.loading && <ReactLoading type='spokes' color='#224f78' />}
         </div>
     );
@@ -148,7 +162,7 @@ class LeaseModal extends Component {
     this.setState({
       datePickerVisible: true,
       airportPickerVisible: false,
-      modelPickerVisible: false,
+      typePickerVisible: false,
     })
   }
 
@@ -192,19 +206,19 @@ class LeaseModal extends Component {
   //ModelPicker stuff
 
   onModelChange(evt) {
-    this.setState({modelInputText: evt.target.value})
+    this.setState({typeInputText: evt.target.value})
   }
 
   changeModelPickerText(text) {
     this.setState({
-      modelInputText: text,
-      modelPickerVisible: false
+      typeInputText: text,
+      typePickerVisible: false
     })
   }
 
   showModelPicker() {
     this.setState({
-      modelPickerVisible: true,
+      typePickerVisible: true,
       airportPickerVisible: false,
       datePickerVisible: false,
     })
@@ -212,28 +226,53 @@ class LeaseModal extends Component {
 
   removeModelPicker() {
     this.setState({
-      modelPickerVisible: false
+      typePickerVisible: false
     })
   }
 
+  //Model textfields
+
+  yearChanged(evt) {
+    this.setState({
+      year: evt.target.value
+    })
+  }
+  makeChanged(evt) {
+    this.setState({
+      make: evt.target.value
+    })
+  }
+  modelChanged(evt) {
+    this.setState({
+      model: evt.target.value
+    })
+  }
+
+  //Submit buttom
 
   submitButtonPressed() {
-    if (this.state.airportInputText == "airport" || this.state.modelInputText == "car-type" || this.state.from == null || this.state.to == null) {
+    console.log(this.state.model)
+    console.log(this.state.airportInputText)
+    if (this.state.airportInputText == "airport" || this.state.typeInputText == "car-type" ||
+    this.state.from == null || this.state.to == null|| this.state.year == "" ||
+    this.state.model == "" || this.state.make == "") {
       this.setState({ errorLabel: "please fill out all the above fields"})
       return
     }
     else {
-      // this.setState({
-      //   loading: true
-      // })
-      firebase.database().ref('rentals/'+ this.state.airportInputText).set({
-        model: this.state.modelInputText,
-        dates: this.state.dateInputText
+
+      firebase.database().ref('rentals/'+ this.state.airportInputText).push().set({
+        airport: this.state.airportInputText,
+        type: this.state.typeInputText,
+        to: dateFormat(this.state.to, "mm/dd/yyyy"),
+        from: dateFormat(this.state.from, "mm/dd/yyyy"),
+        year: this.state.year,
+        make: this.state.make,
+        model: this.state.model,
       });
-      // setTimeout(this.submitCallback.bind(this), 800)
     }
   }
-  
+
 
 }
 

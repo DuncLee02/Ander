@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import firebase from '../../../firebase.js'
+import Global from '../../../Globals.js'
 
 class SignUp extends Component {
 
@@ -60,11 +61,11 @@ class SignUp extends Component {
 
     firebase.auth().signInWithPopup(provider).then(function(result) {
       var token = result.credential.accessToken;
-      this.props.userCallback(result.user)
       firebase.database().ref('users/' + result.user.uid).once('value', function(snapshot) {
         var exists = (snapshot.val() !== null);
+        console.log(snapshot.val())
         if (exists) {
-          console.log('already exists...')
+          Global.User = {name: snapshot.val().name, email: snapshot.val().email, uid: snapshot.val.uid, admin: snapshot.val().admin}
         }
         else {
           console.log('doesnt exist')
@@ -72,9 +73,12 @@ class SignUp extends Component {
             username: result.user.displayName,
             email: result.user.email,
             uid: result.user.uid,
+            admin: false
           });
+          Global.User = {name: result.user.displayName, email: result.user.email, uid: result.user.uid, admin: false}
         }
-      });
+        this.props.userCallback()
+      }.bind(this));
     }.bind(this)).catch(function(error) {
       console.log(error)
       var errorCode = error.code;
