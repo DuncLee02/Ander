@@ -1,3 +1,5 @@
+
+
 body {
   margin: 0;
   padding: 0;
@@ -297,11 +299,13 @@ body {
 }
 
 .searchCalendarContainer{
-  height: 200px;
+  position: relative;
+  height: 0px;
   width: 800px;
   align-self: center;
   margin-right: 50px;
   opacity: 1;
+  z-index: 10;
 }
 
 .searchButton {
@@ -331,21 +335,37 @@ body {
   margin-left: 20px;
 }
 
-.airportPickerContainer {
-  /*background-color: lightGrey;*/
-  height: 400px;
+.searchAirportPickerContainer {
+  position: relative;
+  height: 0px;
   width: 80%;
+  background-color: white;
   margin-left: 40px;
   flex-direction: column;
   display: flex;
+  overflow: visible;
+}
+
+.airportPickerContainer {
+  position: relative;
+  background-color: white;
+  width: 100%;
+  flex-direction: column;
+  border-style: solid;
+  border-color: lightGrey;
+  border-radius: 5px;
+  display: flex;
+  z-index: 10;
 }
 
 .carPickerContainer {
-  height: 400px;
-  width: 50%;
+  height: 0px;
+  width: 500px;
   margin-left: 58%;
   flex-direction: column;
   display: flex;
+  z-index: 10;
+  overflow: visible;
 }
 
 .airportPickerText {
@@ -375,9 +395,27 @@ body {
 }
 
 .leaseCalendar {
-  height: 300px;
-  width: 600px;
+  position: relative;
+  height: 0px;
+  width: 590px;
+  align-self: center;
   opacity: 1;
+  z-index: 10;
+}
+
+.leaseModelPickerContainer {
+  position: relative;
+  height: 0px;
+
+}
+
+.modelOverallContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 500px;
+  height: 500px;
+  background-color: white;
 }
 
 .modelPickerImage {
@@ -393,6 +431,8 @@ body {
     border-style: solid;
     border-color: lightGrey;
     margin: 5px;
+    background-color: white;
+    z-index: 10;
 }
 
 .modelPickerContainer:hover {
@@ -516,4 +556,35 @@ body {
   margin-top: 15px;
   font-size: 17px;
   font-weight: normal;
+}
+
+.rentalPanelReserveButton {
+  position: absolute;
+  bottom: 20px;
+  height: 50px;
+  width: 90px;
+  background-color: #224f78;
+  border-style: none;
+  margin-right: 5px;
+  border-radius: 5px;
+  color: white;
+  font-size: 17px;
+  font-weight: lighter;
+}
+
+.rentalPanelErrorMessage {
+  color: red;
+  position: absolute;
+  bottom: 80px;
+}
+
+.reservationsContainer {
+  position: absolute;
+  right: 400px;
+  top: 40px;
+  height: 300px;
+  width: 200px;
+  border-style: solid;
+  border-color: lightGrey;
+
 }

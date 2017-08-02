@@ -23,8 +23,9 @@ class carPicker extends Component {
   }
 
   render() {
+    console.log(this.carTypes.length)
     return (
-      <div className='flexRow' style={{'height': 30*this.carTypes.length, 'flexWrap': 'wrap'}}>
+      <div className='modelOverallContainer' id ='picker' style={{'height': 30*this.carTypes.length}}>
         {this.carTypes.map((car, index) => {
           return(
             <div className='modelPickerContainer' key={index} onClick={this.pickerClicked.bind(null, index, car.name)}>

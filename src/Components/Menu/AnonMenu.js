@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import SignIn from './SearchSignIn.js'
 import SignUp from './SearchSignUp.js'
 
 import Global from '../../Globals.js'
@@ -43,17 +42,17 @@ class SearchMenu extends Component {
         <Modal
         isOpen={this.state.logInVisible}
         contentLabel="Modal"
-        className='searchModal'
+        className='loginModal'
         overlayClassName='modal-overlay'
         onRequestClose={this.toggleSignIn.bind(this)}
         >
-          <SignIn/>
+          <SignUp userCallback={this.userCallback}/>
         </Modal>
 
         <Modal
         isOpen={this.state.signUpVisible}
         contentLabel="Modal"
-        className='searchModal'
+        className='loginModal'
         overlayClassName='modal-overlay'
         onRequestClose={this.toggleSignUp.bind(this)}
         >
@@ -84,12 +83,13 @@ class SearchMenu extends Component {
     })
   }
 
-  userCallback(aUser) {
-    Global.user = {name: aUser.displayName, email: aUser.email, uid: aUser.uid}
+  userCallback() {
     this.setState({
       logInVisible: false,
       signUpVisible: false,
     })
+    console.log('signing in...')
+    this.props.signIn(true)
   }
 
 

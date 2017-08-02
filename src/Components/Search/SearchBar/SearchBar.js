@@ -139,7 +139,9 @@ class SearchBar extends Component {
             />
             </div>
           }
-          {this.state.airportPickerVisible && <PlaceDropdown textInput={this.state.airportInputText} changePlacePickerText={this.changePlacePickerText}/>}
+          {this.state.airportPickerVisible && <div className='searchAirportPickerContainer'>
+            <PlaceDropdown textInput={this.state.airportInputText} changePlacePickerText={this.changePlacePickerText}/>
+          </div>}
           {this.state.carPickerVisible && <div className='carPickerContainer'>
             <CarTypeDropdown changeCarPickerText={this.changeCarPickerText}/>
             </div>}
@@ -153,10 +155,12 @@ class SearchBar extends Component {
     if (this.state.airportInputText == "airport") {
       return
     }
+    Global.RentalCars = []
     console.log('pinging firebase')
+    console.log(Global.RentalCars.length)
     firebase.database().ref("rentals/" + this.state.airportInputText ).on('value', (snap) => {
       // get children as an array
-      console.log(snap.val())
+      // console.log(snap.val())
       var items = [];
       snap.forEach((child) => {
         const airport = child.val().airport
@@ -168,9 +172,20 @@ class SearchBar extends Component {
         const make = child.val().make
         const model = child.val().model
 
-        const newCar = new RentalCar(airport, to, from, type, uid, year, make, model)
-        Global.RentalCars.push(newCar)
+        const reservationArray = []
+        child.child('reservations').forEach((reservation) => {
+          const start = new Date( reservation.val().start)
+          const end = new Date(reservation.val().end)
+          const reservationJson = {startDate: start, endDate: end}
+          reservationArray.push(reservationJson)
+        })
+        const newCar = new RentalCar(airport, to, from, type, uid, year, make, model, reservationArray)
+
+        if (newCar.model != null) {
+          Global.RentalCars.push(newCar)
+        } 
       });
+      console.log(Global.RentalCars.length)
       this.props.updateResults()
     })
   }

@@ -21,6 +21,8 @@ class RentalCar extends Component {
   }
 
   openNewTab() {
+    console.log(this.props.thisCar.airport)
+    // window.open("ander/rentals/" + this.props.thisCar.airport + "/" + this.props.thisCar.uid, '_blank');
     window.open("rentals/" + this.props.thisCar.airport + "/" + this.props.thisCar.uid, '_blank');
   }
 

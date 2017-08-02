@@ -3,6 +3,7 @@ import Modal from 'react-modal'
 import Global from '../../Globals.js'
 
 import LeaseModal from '../AdminPages/CreateCar.js'
+import ReservationPopUp from '../Reservations/ReservationsPopUp.js'
 
 
 
@@ -31,7 +32,7 @@ class SearchMenu extends Component {
       <div className ='flexVertical' >
         <div className = 'searchMenu'>
           <div className='searchAnderLogo'>
-            <img className='menuImg' src={require('../../../Assets/Ander.png')} alt={'Menu'} />
+            <img className='menuImg' src={require('../../Assets/Ander.png')} alt={'Menu'} />
           </div>
           <div className='searchMenuItem' >
             <text className='textSmall' onClick={this.showReservationPage}> Reservations </text>
@@ -52,7 +53,7 @@ class SearchMenu extends Component {
         </div>
 
         {this.state.reservationsVisible && <div className='reservationsContainer'>
-          <text> reservations </text>
+          <ReservationPopUp/>
         </div> }
 
         <Modal

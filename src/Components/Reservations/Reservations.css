@@ -1,0 +1,10 @@
+.reservationsContainer {
+  position: absolute;
+  right: 400px;
+  top: 40px;
+  height: 300px;
+  width: 200px;
+  border-style: solid;
+  border-color: lightGrey;
+
+}

@@ -53,28 +53,31 @@ class LeaseModal extends Component {
     this.makeChanged = this.makeChanged.bind(this)
   }
 
-  // componentDidMount() {
-  //   console.log('unmounting...')
-  //   window.addEventListener('mousedown', this.pageClick, false);
-  //   this.setState({
-  //     from: null,
-  //     to: null,
-  //   })
-  // }
-  //
-  //
-  // componentWillUnmount() {
-  //   window.removeEventListener('mousedown', this.pageClick, false);
-  // }
-  //
-  //
-  //   pageClick = e => {
-  //     if(e.target.id = 'modalBackground') {
-  //       this.removeDatePicker()
-  //       this.removeAirportPicker()
-  //       this.removeModelPicker()
-  //     }
-  //   }
+  componentDidMount() {
+    console.log('unmounting...')
+    window.addEventListener('mousedown', this.pageClick, false);
+    this.setState({
+      from: null,
+      to: null,
+    })
+  }
+
+
+  componentWillUnmount() {
+    window.removeEventListener('mousedown', this.pageClick, false);
+  }
+
+
+    pageClick = e => {
+      if(e.target.id == 'modalBackground') {
+        this.setState({
+          typePickerVisible: false,
+          datePickerVisible: false,
+          airportPickerVisible: false,
+        })
+      }
+    }
+
 
   render() {
     const { from, to} = this.state;
@@ -82,7 +85,9 @@ class LeaseModal extends Component {
     return (
         <div className='flexVertical' id='modalBackground' style={{'alignItems': 'center', 'marignTop': 50}}>
           <input className='createCarInput' type='text' onClick={this.showAirportPicker} onChange={this.onAirportChange} value={this.state.airportInputText} style={{'textAlign':'left', 'fontSize': 17}} />
-          {this.state.airportPickerVisible && <PlaceDropdown textInput={this.state.airportInputText} changePlacePickerText={this.changeAirportPickerText}/>}
+          {this.state.airportPickerVisible && <div className='searchAirportPickerContainer'>
+            <PlaceDropdown textInput={this.state.airportInputText} changePlacePickerText={this.changeAirportPickerText}/>
+          </div>}
 
           <button className='createCarInput' style={{'textAlign':'left', 'fontSize': 17}} onClick={this.showDatePicker}>
             <text> {this.state.dateInputText} </text>
@@ -99,7 +104,7 @@ class LeaseModal extends Component {
           }
 
           <input className='createCarInput' type='text'  onClick={this.showModelPicker} onChange={this.onModelChange} value={this.state.typeInputText} style={{'textAlign':'left', 'fontSize': 17}} readOnly/>
-          {this.state.typePickerVisible && <div style={{'width': 500}}>
+          {this.state.typePickerVisible && <div className='leaseModelPickerContainer'>
             <CarTypeDropdown changeCarPickerText={this.changeModelPickerText}/>
           </div>}
 
@@ -130,7 +135,7 @@ class LeaseModal extends Component {
     this.setState({
       airportPickerVisible: true,
       datePickerVisible: false,
-      modelPickerVisible: false
+      typePickerVisible: false
     })
   }
 

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Link } from 'react-router-dom'
 
-import UserMenu from './SearchMenu/UserMenu.js'
-import AnonMenu from './SearchMenu/AnonMenu.js'
+import firebase from '../../firebase.js'
+import UserMenu from '../Menu/UserMenu.js'
+import AnonMenu from '../Menu/AnonMenu.js'
 import SearchBar from './SearchBar/SearchBar.js'
 import ResultsSection from './Results/ResultContainer.js'
 import RentalCarPage from './RentalPage/RentalPage.js'
@@ -20,6 +21,12 @@ class Base extends Component {
       this.setState({
         userSignedIn: true,
       })
+    }
+    else {
+      let currentUser = firebase.auth().currentUser
+      if (currentUser != null) {
+        console.log('signed in...')
+      }
     }
   }
 

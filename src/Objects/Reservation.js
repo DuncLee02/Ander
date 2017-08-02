@@ -1,11 +1,10 @@
 
-class RentalCar {
-  constructor(airport, to, from, type, uid, year, make, model, starts) {
+class Reservation {
+  constructor(airport, to, from, type, uid, year, make, model, starts, ends) {
     this.airport = airport
-    this.type = type
     this.to = to
     this.from = from
-    this.model= model
+    this.type = type
     this.uid = uid
     this.year = year
     this.make = make
@@ -15,4 +14,4 @@ class RentalCar {
   }
 }
 
-module.exports = RentalCar;
+module.exports = Reservation;

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Link } from 'react-router-dom'
 import ReactLoading from 'react-loading'
+import moment from 'moment'
+
 
 import firebase from '../../../firebase.js'
 import RentalCar from '../../../Objects/RentalCar.js'
@@ -34,11 +36,32 @@ class RentalPage extends Component {
       const make = snap.val().make
       const model = snap.val().model
 
-      const newCar = new RentalCar(airport, to, from, type, uid, year, make, model)
+      const reservationArray = []
+      console.log(snap.val().reservations)
+      snap.child('reservations').forEach((reservation) => {
+        const start = new moment( reservation.val().start)
+        const end = new moment(reservation.val().end)
+        const reservationJson = {startDate: start, endDate: end}
+
+        reservationArray.push(reservationJson)
+      })
+
+      const newCar = new RentalCar(airport, to, from, type, uid, year, make, model, reservationArray)
       this.setState({
         thisCar: newCar
       })
     })
+  }
+
+  getDates(startDate, stopDate) {
+    var dateArray = [];
+    var currentDate = moment(startDate);
+    var stopDate = moment(stopDate);
+    while (currentDate <= stopDate) {
+        dateArray.push( new Date(moment(currentDate).format('YYYY-MM-DD')) )
+        currentDate = moment(currentDate).add(1, 'days');
+    }
+    return dateArray;
   }
 
   render() {
@@ -53,7 +76,7 @@ class RentalPage extends Component {
             <img className='rentalCarTopImage' src={require('../../../Assets/CarTypes/standard.png')} alt={'car'} />
             <div className='rentalInfoContainer' >
               <text className='rentalCarTitle'> {thisCar.make + " " + thisCar.model + " " + thisCar.year} </text>
-              <RentalPanel/>
+              <RentalPanel thisCar={thisCar} />
             </div>
           </div>
         }

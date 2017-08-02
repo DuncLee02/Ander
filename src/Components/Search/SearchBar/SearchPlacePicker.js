@@ -34,14 +34,16 @@ class PlaceDropdown extends Component {
 
 
     return (
-      <div className='airportPickerContainer' style={{'height': 30*this.querry.length}}>
-        {this.querry.map((name, index) => {
-          return(
-            <text className='airportPickerText' key={index} onClick={this.pickerClicked.bind(null, index, name)}> {name} </text>
-          )
-        })}
-
+      <div style={{'backgroundColor': 'white'}}>
+        <div className='airportPickerContainer' style={{'height': 30*this.querry.length}}>
+          {this.querry.map((name, index) => {
+            return(
+              <text className='airportPickerText' key={index} onClick={this.pickerClicked.bind(null, index, name)}> {name} </text>
+            )
+          })}
+        </div>
       </div>
+
     );
 
   }

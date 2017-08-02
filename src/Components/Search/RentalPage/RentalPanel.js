@@ -1,7 +1,11 @@
 
 import React, { Component } from 'react';
-import DayPicker, { DateUtils } from 'react-day-picker';
+import ReactDOM from 'react-dom'
+import firebase from '../../../firebase.js'
+import Global from '../../../Globals.js'
+import moment from 'moment';
 
+import DatePicker from './RentalPageDatePicker.js'
 let dateFormat = require('dateformat');
 
 class RentalPanel extends Component {
@@ -17,54 +21,89 @@ class RentalPanel extends Component {
       dateInputText: 'from    -     to',
       datePickerVisible: false,
 
+      startDate: null,
+      endDate: null,
+
+      errorMessage: ''
     }
     this.showDatePicker = this.showDatePicker.bind(this)
     this.removeDatePicker = this.removeDatePicker.bind(this)
+    this.reserveCar = this.reserveCar.bind(this)
+    this.dateChanged = this.dateChanged.bind(this)
   }
 
   render() {
-    const { from, to} = this.state;
+    const thisCar = this.props.thisCar
+    console.log(thisCar)
     return (
       <div className='rentalPanelContainer'>
         <div className='rentalPanelTitleBox'>
-          <text> ${this.state.price} per night </text>
+          <text> ${this.state.price} per day </text>
         </div>
 
         <button className='rentalPanelDatePickerInput' style={{'textAlign':'left', 'fontSize': 17}} onClick={this.showDatePicker}>
           <text> {this.state.dateInputText} </text>
         </button>
+
         {this.state.datePickerVisible && <div className='rentalPanelCalendar'>
-          <DayPicker
-          numberOfMonths={2}
-          selectedDays={[from, { from, to }]}
-          onDayClick={this.handleDayClick}
-          fixedWeeks
-          />
+          <DatePicker startDate={this.state.startDate} endDate={this.state.endDate} dateChanged={this.dateChanged} disabledDays={thisCar.reservations}/>
         </div>
         }
 
         {this.state.daysBetween &&
           <div className='rentalPanelPriceBox'>
             <text> Total: </text>
-            <text> {this.state.price * this.state.daysBetween} </text>
+            <text> ${this.state.price * this.state.daysBetween} </text>
           </div>
         }
 
+        <button className='rentalPanelReserveButton' onClick={this.reserveCar}>
+          <text> reserve </text>
+        </button>
+
+        <text className={'rentalPanelErrorMessage'}> {this.state.errorMessage} </text>
 
       </div>
     );
   }
 
+  // <DayPicker
+  // numberOfMonths={2}
+  // selectedDays={[from, { from, to }]}
+  // disabledDays={thisCar.reservationArray}
+  // onDayClick={this.handleDayClick}
+  // fixedWeeks
+  // />
+
+  componentDidMount() {
+    console.log('unmounting...')
+    window.addEventListener('mousedown', this.pageClick, false);
+    this.setState({
+      from: null,
+      to: null,
+    })
+  }
+
+
+  componentWillUnmount() {
+    window.removeEventListener('mousedown', this.pageClick, false);
+  }
+
+
+    pageClick = e => {
+      if(!ReactDOM.findDOMNode(this).contains(e.target)) {
+        this.removeDatePicker()
+      }
+    }
+
   showDatePicker() {
     this.setState({
       datePickerVisible: true,
-      airportPickerVisible: false,
-      typePickerVisible: false,
     })
   }
 
   removeDatePicker() {
-    if (this.state.to == null && this.state.from == null) {
+    if (this.state.startDate == null && this.state.endDate == null) {
       this.setState({
         dateInputText: "Rent – Dropoff"
       })
@@ -74,35 +113,33 @@ class RentalPanel extends Component {
     })
   }
 
-  handleDayClick = day => {
-    const range = DateUtils.addDayToRange(day, this.state);
-    this.setState(range, function() {
-      if (this.state.to != null) {
-        setTimeout(this.removeDatePicker.bind(this), 800)
-        this.setState({
-          dateInputText: dateFormat(this.state.from, "mm/dd/yyyy") + "  –  " + dateFormat(this.state.to, "mm/dd/yyyy"),
-          daysBetween: this.daysBetween(this.state.from, this.state.to)
-        })
-      }
-      else {
-        this.setState({
-          dateInputText: dateFormat(day, "mm/dd/yyyy") + "  –       Dropoff"
-        })
-      }
+  dateChanged(start, end, isViable) {
+    console.log(start)
+    this.setState({
+      startDate: start,
+      endDate: end,
+      isViable: isViable
     })
-  }
-
-  treatAsUTC(date) {
-    var result = new Date(date);
-    result.setMinutes(result.getMinutes() - result.getTimezoneOffset());
-    return result;
+    if (end != null) {
+          setTimeout(this.removeDatePicker.bind(this), 800)
+          this.setState({
+            dateInputText: dateFormat(start, "mm/dd/yyyy") + "  –  " + dateFormat(end, "mm/dd/yyyy"),
+            daysBetween: this.daysBetween(start, end)
+          })
+        }
+        else {
+          this.setState({
+            dateInputText: dateFormat(start, "mm/dd/yyyy") + "  –       Dropoff"
+          })
+        }
   }
 
   daysBetween(startDate, endDate) {
-    var millisecondsPerDay = 24 * 60 * 60 * 1000;
-    return (this.treatAsUTC(endDate) - this.treatAsUTC(startDate)) / millisecondsPerDay;
+    const duration = moment.duration(endDate.diff(startDate));
+    const days = duration.asDays();
+    return days
+    console.log("days: " + days)
   }
-
 
   handleResetClick = e => {
     e.preventDefault();
@@ -110,6 +147,55 @@ class RentalPanel extends Component {
       from: null,
       to: null,
     });
+  }
+
+  reserveCar() {
+
+    console.log(this.state.startDate)
+    console.log(this.state.endDate)
+
+    if (Global.User == null) {
+      this.setState({
+        errorMessage: 'user must be signed in'
+      })
+      return
+    }
+
+    if (this.state.startDate == null || this.state.endDate == null ) {
+      this.setState({
+        errorMessage: 'user must pick dates of reservation'
+      })
+      return
+    }
+
+    if (!this.state.isViable) {
+      this.setState({
+        errorMessage: 'inviable dates'
+      })
+    }
+
+    this.setState({
+      errorMessage: '',
+    })
+
+    const thisCar = this.props.thisCar
+    console.log(Global.User)
+    firebase.database().ref('userReservations/' + Global.User.uid + '/' + thisCar.uid).set({
+      airport: thisCar.airport,
+      type: thisCar.type,
+      to: thisCar.to,
+      from: thisCar.from,
+      year: thisCar.year,
+      make: thisCar.make,
+      model: thisCar.model,
+      reservationStarts: this.state.startDate.format('MM/DD/YYYY'),
+      reservationEnds: this.state.endDate.format('MM/DD/YYYY'),
+    });
+
+    firebase.database().ref('rentals/'+ thisCar.airport + '/' + thisCar.uid + '/' + 'reservations').push({
+      start: this.state.startDate.format('MM/DD/YYYY'),
+      end: this.state.endDate.format('MM/DD/YYYY'),
+    })
   }
 
 

@@ -17,6 +17,13 @@ class App extends Component {
   }
 
   render() {
+
+    var pathArray = window.location.pathname.split( '/' );
+    console.log(pathArray.length)
+    if (pathArray.length == 2) {
+      window.history.pushState(null, null, '/ander');
+    }
+
     return (
       <div className="App">
         {this.getPage()}

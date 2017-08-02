@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import firebase from '../../../firebase.js'
-import Global from '../../../Globals.js'
+import firebase from '../../firebase.js'
+import Global from '../../Globals.js'
 
 class SignUp extends Component {
 
@@ -21,7 +21,7 @@ class SignUp extends Component {
         <div className='flexVertical' style={{'alignItems': 'center', 'marignTop': 50, 'opacity': 1}}>
 
           <button className='signInGoogleButton' onClick={this.googleSignUpClicked}>
-            <img src={require('../../../Assets/GoogleSymbol.png')} alt={'Menu'} style={{'height': 30, 'width': 30}}/>
+            <img src={require('../../Assets/GoogleSymbol.png')} alt={'Menu'} style={{'height': 30, 'width': 30}}/>
             <text className='textBig'> Continue with Google </text>
           </button>
         </div>
@@ -65,7 +65,7 @@ class SignUp extends Component {
         var exists = (snapshot.val() !== null);
         console.log(snapshot.val())
         if (exists) {
-          Global.User = {name: snapshot.val().name, email: snapshot.val().email, uid: snapshot.val.uid, admin: snapshot.val().admin}
+          Global.User = {name: snapshot.val().username, email: snapshot.val().email, uid: snapshot.val().uid, admin: snapshot.val().admin}
         }
         else {
           console.log('doesnt exist')
