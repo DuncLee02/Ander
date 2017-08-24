@@ -1,8 +1,8 @@
 
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom'
-import firebase from '../../../firebase.js'
-import Global from '../../../Globals.js'
+import firebase from '../../firebase.js'
+import Global from '../../Globals.js'
 import moment from 'moment';
 
 import DatePicker from './RentalPageDatePicker.js'
@@ -114,7 +114,7 @@ class RentalPanel extends Component {
   }
 
   dateChanged(start, end, isViable) {
-    console.log(start)
+    console.log('date is viable?: ' + isViable)
     this.setState({
       startDate: start,
       endDate: end,
@@ -172,6 +172,7 @@ class RentalPanel extends Component {
       this.setState({
         errorMessage: 'inviable dates'
       })
+      return
     }
 
     this.setState({
@@ -180,7 +181,12 @@ class RentalPanel extends Component {
 
     const thisCar = this.props.thisCar
     console.log(Global.User)
-    firebase.database().ref('userReservations/' + Global.User.uid + '/' + thisCar.uid).set({
+
+    const key = firebase.database().ref().push().key
+
+    console.log(key)
+
+    firebase.database().ref('userReservations/' + Global.User.uid + '/' + key).set({
       airport: thisCar.airport,
       type: thisCar.type,
       to: thisCar.to,
@@ -190,9 +196,12 @@ class RentalPanel extends Component {
       model: thisCar.model,
       reservationStarts: this.state.startDate.format('MM/DD/YYYY'),
       reservationEnds: this.state.endDate.format('MM/DD/YYYY'),
+      carUid: thisCar.uid,
     });
 
-    firebase.database().ref('rentals/'+ thisCar.airport + '/' + thisCar.uid + '/' + 'reservations').push({
+    // console.log('uid: ' + uid)
+
+    firebase.database().ref('rentals/'+ thisCar.airport + '/' + thisCar.uid + '/' + 'reservations/' + key).set({
       start: this.state.startDate.format('MM/DD/YYYY'),
       end: this.state.endDate.format('MM/DD/YYYY'),
     })

@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route, Link } from 'react-router-dom'
 import ReactLoading from 'react-loading'
 import moment from 'moment'
+import './RentalPage.css'
 
 
-import firebase from '../../../firebase.js'
-import RentalCar from '../../../Objects/RentalCar.js'
+import firebase from '../../firebase.js'
+import RentalCar from '../../Objects/RentalCar.js'
 import RentalPanel from './RentalPanel.js'
 
 
@@ -20,13 +21,19 @@ class RentalPage extends Component {
 
   componentDidMount() {
     console.log(this.props.location.pathname)
+
     let arr = this.props.location.pathname.split('/')
-    const airport = arr[3]
+    const airport = arr[arr.length - 2]
     console.log("airport: " + airport)
-    const uid = arr[4]
+    const uid = arr[arr.length - 1]
     console.log('uid: ' + uid)
     firebase.database().ref('rentals/' + airport + '/' + uid).on('value', (snap) => {
-      console.log(snap.val())
+      console.log("snap: " + snap.val())
+
+      if (snap.val() == null) {
+        return
+      }
+
       const uid = snap.key
       const airport = snap.val().airport
       const to = snap.val().to
@@ -73,7 +80,7 @@ class RentalPage extends Component {
         {thisCar == null && <ReactLoading className='rentalCarLoading' type='spokes' color='#224f78' /> }
         {thisCar != null &&
           <div className='flexVertical'>
-            <img className='rentalCarTopImage' src={require('../../../Assets/CarTypes/standard.png')} alt={'car'} />
+            <img className='rentalCarTopImage' src={require('../../Assets/CarTypes/standard.png')} alt={'car'} />
             <div className='rentalInfoContainer' >
               <text className='rentalCarTitle'> {thisCar.make + " " + thisCar.model + " " + thisCar.year} </text>
               <RentalPanel thisCar={thisCar} />

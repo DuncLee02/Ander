@@ -1,6 +1,6 @@
 
 class Reservation {
-  constructor(airport, to, from, type, uid, year, make, model, starts, ends) {
+  constructor(airport, to, from, type, uid, year, make, model, starts, ends, carUid) {
     this.airport = airport
     this.to = to
     this.from = from
@@ -11,6 +11,7 @@ class Reservation {
     this.model = model
     this.reservationStarts = starts
     this.reservationEnds = ends
+    this.carUid = carUid
   }
 }
 

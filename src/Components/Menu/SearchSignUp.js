@@ -18,7 +18,7 @@ class SignUp extends Component {
       var provider = new firebase.auth.GoogleAuthProvider();
 
     return (
-        <div className='flexVertical' style={{'alignItems': 'center', 'marignTop': 50, 'opacity': 1}}>
+        <div className='flexVertical' style={{'alignItems': 'center', 'marignTop': 50, 'opacity': 1, 'zIndex': 50}}>
 
           <button className='signInGoogleButton' onClick={this.googleSignUpClicked}>
             <img src={require('../../Assets/GoogleSymbol.png')} alt={'Menu'} style={{'height': 30, 'width': 30}}/>

@@ -1,0 +1,90 @@
+.searchInput {
+  margin-top: 5px;
+  outline: none;
+  height: 30;
+  width: 90%;
+  border-style: none;
+  text-align: left;
+  font-size: 20px;
+  background-color: white;
+  color: grey;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.smallSearchInput {
+  margin-top: 5px;
+  outline: none;
+  height: 30;
+  width: 90%;
+  border-style: none;
+  text-align: left;
+  font-size: 15px;
+  background-color: white;
+  color: grey;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.searchText {
+  font-size: 15px;
+  margin-left: 5px;
+}
+
+.searchInputContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  border-style: solid;
+  border-width: 1px;
+  border-color: lightGrey;
+  text-align: left;
+  height: 70px;
+  width: 40%;
+}
+
+.smallSearchInputContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  border-style: solid;
+  border-width: 1px;
+  border-color: lightGrey;
+  text-align: left;
+  height: 50px;
+  width: 40%;
+}
+
+.searchButton {
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  text-decoration: none;
+  height: 50px;
+  width: 90px;
+  background-color: #224f78;
+  border-style: none;
+  margin-right: 5px;
+  border-radius: 5px;
+  color: white;
+  font-size: 17px;
+  font-weight: lighter;
+  cursor: pointer;
+}
+
+.smallSearchButton {
+  text-decoration: none;
+  height: 40px;
+  width: 90px;
+  background-color: #224f78;
+  border-style: none;
+  margin-right: 5px;
+  border-radius: 5px;
+  color: white;
+  font-size: 17px;
+  font-weight: lighter;
+  cursor: pointer;
+}

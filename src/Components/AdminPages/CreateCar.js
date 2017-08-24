@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import firebase from '../../firebase.js'
 import ReactDOM from 'react-dom'
 import ReactLoading from 'react-loading'
+import './Create.css'
 
 import PlaceDropdown from '../Search/SearchBar/SearchPlacePicker.js'
 import CarTypeDropdown from '../Search/SearchBar/SearchCarTypePicker.js'

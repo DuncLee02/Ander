@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import Global from '../../../Globals.js'
 import RentalCar from './ResultCar.js'
+import './Result.css'
 
 class Results extends Component {
 

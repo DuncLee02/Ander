@@ -1,10 +1,97 @@
+
+
 .reservationsContainer {
   position: absolute;
   right: 400px;
   top: 40px;
-  height: 300px;
-  width: 200px;
+  height: 400px;
+  width: 300px;
+  /*border-style: solid;
+  border-color: lightGrey;
+  background-color: white;*/
+  z-index: 10;
+}
+
+.reservationsFlex {
+  display: flex;
+  flex-direction: column;
+}
+
+.reservationsNoneFound {
+  display: flex;
+  /*flex-direction: column;*/
+  background-color: white;
   border-style: solid;
   border-color: lightGrey;
+  height: 50px;
+  border-width: 2px;
+}
 
+.reservationItemContainer {
+  display: flex;
+  flex-direction: row;
+  height: 80px;
+  width: 100%;
+  background-color: white;
+  border-width: 2px;
+  border-bottom-width: 2px;
+  border-style: solid;
+  border-color: lightGrey;
+  justify-content: space-around;
+}
+
+.reservationInfoBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-content: flex-end;
+  text-align: left;
+  margin: 5px;
+}
+
+.reservationPeriodText {
+  font-size: 12px;
+  font-weight: lighter;
+}
+
+.reservationMainBox {
+  display: flex;
+  flex-direction: column;
+  align-content: flex-start;
+  margin: 5px;
+}
+
+.reservationDestinationText {
+  font-size: 15px;
+  font-weight: 200;
+}
+
+.noReservationsText {
+  position: absolute;
+  width: 100%;
+  top: 45%;
+  /*text-align: center;*/
+}
+
+.reservationImage {
+  height: 50px;
+  width: 50px;
+}
+
+.reservationEditButton {
+  margin: 5px;
+  border-style: solid;
+  border-width: 0px;
+  height: 20px;
+  width: 50px;
+  background-color: orange;
+}
+
+.reservationDeleteButton {
+  margin: 5px;
+  border-style: solid;
+  border-width: 0px;
+  height: 20px;
+  width: 50px;
+  background-color: red;
 }

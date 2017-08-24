@@ -14,8 +14,12 @@ class RentalCar extends Component {
     const thisCar = this.props.thisCar
     return (
       <div className='resultCarContainer' onClick={this.openNewTab}>
-        <img className='resultCarImage' src={require('../../../Assets/CarTypes/standard.png')} alt={'car'} />
-        <text> {thisCar.year + " " + thisCar.make + " " + thisCar.model} </text>
+        <img className='resultCarImage' src={require('../../../Assets/CarTypes/exampleCar.png')} alt={'car'} />
+        <div className='flexRow'>
+          <text className='resultPriceText'> {'$150/day • '} </text>
+          <text> {thisCar.year + " " + thisCar.make + " " + thisCar.model} </text>
+        </div>
+        <text> {thisCar.airport + " • "} </text>
       </div>
     );
   }
@@ -23,7 +27,7 @@ class RentalCar extends Component {
   openNewTab() {
     console.log(this.props.thisCar.airport)
     // window.open("ander/rentals/" + this.props.thisCar.airport + "/" + this.props.thisCar.uid, '_blank');
-    window.open("rentals/" + this.props.thisCar.airport + "/" + this.props.thisCar.uid, '_blank');
+    window.open("/rentals/" + this.props.thisCar.airport + "/" + this.props.thisCar.uid, '_blank');
   }
 
 }

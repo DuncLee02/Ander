@@ -1,0 +1,12 @@
+
+.topRightSearchBar {
+  height: 40px;
+  width: 600px;
+  margin-bottom: 30px;
+}
+
+.resultPageLayout {
+  margin: 30px;
+  display: flex;
+  flex-direction: column;
+}

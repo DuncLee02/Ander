@@ -14,6 +14,12 @@ class Menu extends Component {
     }
   }
 
+  componentDidMount() {
+    this.setState({
+      selectedSection: this.props.pageSelected
+    })
+  }
+
   render() {
     var languages = ['ander', 'Park', 'Rent', 'Host']
 

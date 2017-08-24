@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-
-import Info from './Components/Menu.js';
 import './App.css';
-import SearchBase from './Components/Search/SearchBase.js'
+import SearchBase from './Components/Base.js'
 
 
 class App extends Component {
@@ -17,16 +15,17 @@ class App extends Component {
   }
 
   render() {
+    console.log('ander vs. 1.1')
 
-    var pathArray = window.location.pathname.split( '/' );
-    console.log(pathArray.length)
-    if (pathArray.length == 2) {
-      window.history.pushState(null, null, '/ander');
-    }
+    // var pathArray = window.location.pathname.split( '/' );
+    // console.log(pathArray.length)
+    // if (pathArray.length == 2) {
+    //   window.history.pushState(null, null, '/ander');
+    // }
 
     return (
       <div className="App">
-        {this.getPage()}
+        <SearchBase changeMainPage={this.changeMainPage}/>
       </div>
     );
   }
@@ -40,9 +39,10 @@ class App extends Component {
 
   getPage() {
     console.log(this.state.selectedSection)
-    if (this.state.pageRendered === 'Info') {
-      return <Info changeMainPage={this.changeMainPage}/>
-    }
+    // if (this.state.pageRendered === 'Info'|| this.state.pageRendered === 'ander' || this.state.pageRendered === 'Park' || this.state.pageRendered === 'Rent' || this.state.pageRendered === 'Host') {
+    //   return <Info changeMainPage={this.changeMainPage} pageSelected={this.state.pageRendered}/>
+    // }
+
     if (this.state.pageRendered === 'Search') {
       return <SearchBase changeMainPage={this.changeMainPage}/>
     }

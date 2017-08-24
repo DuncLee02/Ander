@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom'
 
 class Host extends Component {
 
@@ -19,27 +20,27 @@ class Host extends Component {
 
         <div className='flexRow' style={{'justifyContent': 'space-around', 'textAlign': 'left', 'margin': 20, }}>
           <div className='flexRow' style={{'justifyContent': 'center', 'width': '33%'}}>
-            <img alt='' className='numbers' src={require('../Assets/HostOne.png')}/>
+            <img alt='' className='numbers' src={require('../../Assets/HostOne.png')}/>
             <div className='flexVertical' style={{'maxWidth': 300}}>
-              <img alt='' className='reasonsImage' src={require('../Assets/HostList.png')}/>
+              <img alt='' className='reasonsImage' src={require('../../Assets/HostList.png')}/>
               <text className='textBigBold'> Book </text>
               <text> Check out listings and choose a rental that fits your needs </text>
             </div>
           </div>
 
           <div className='flexRow' style={{'justifyContent': 'center', 'width': '33%'}}>
-            <img alt='' className='numbers' src={require('../Assets/HostTwo.png')}/>
+            <img alt='' className='numbers' src={require('../../Assets/HostTwo.png')}/>
             <div className='flexVertical' style={{'maxWidth': 300}}>
-              <img alt='' className='reasonsImage' src={require('../Assets/HostSetup.png')}/>
+              <img alt='' className='reasonsImage' src={require('../../Assets/HostSetup.png')}/>
               <text className='textBigBold'> Pickup </text>
               <text> Arrive at our designated parking space hosts and pickup the rental </text>
             </div>
           </div>
 
           <div className='flexRow' style={{'justifyContent': 'center', 'width': '33%'}}>
-            <img alt='' className='numbers' src={require('../Assets/HostThree.png')}/>
+            <img alt='' className='numbers' src={require('../../Assets/HostThree.png')}/>
             <div className='flexVertical' style={{'maxWidth': 300}}>
-              <img alt='' className='reasonsImage' src={require('../Assets/HostMoney.png')}/>
+              <img alt='' className='reasonsImage' src={require('../../Assets/HostMoney.png')}/>
               <text className='textBigBold'> Return </text>
               <text> Drive safe and return the vehicle in the condition requested by the owner </text>
             </div>
@@ -81,7 +82,7 @@ class Host extends Component {
             <div className='flexRow'>
               <div className='flexVertical' style={{'maxWidth': 300 }}>
                 <text className='textBigBold'> List </text>
-                <text> Finish up the administrative processand you’re all set to list yourparking space and start earning money </text>
+                <text> Finish up the administrative processand you’re all set to list your parking space and start earning money </text>
               </div>
               <button className='learnMoreButton' style={{'marginTop':50, 'marginLeft': 30, 'backgroundColor': '#9dc3e6'}}>
                 <text className='learnMoreText'>  List </text>
@@ -100,7 +101,7 @@ class Host extends Component {
           <div className='flexRow'>
 
             <div className='flexRow' style={{'width': '50%'}}>
-              <img alt='' className='reasonsImage' src={require('../Assets/Rental.png')}/>
+              <img alt='' className='reasonsImage' src={require('../../Assets/Rental.png')}/>
               <div className='flexVertical' style={{'marginLeft': 20}}>
                 <text className='textBigBold' style={{'marginTop': 30}}> Rental agency licenses </text>
                 <text style={{'minHeight': 110}}> We can help you throughout the application process to make it as easy as possible – so you can start earning extra income quickly </text>
@@ -111,7 +112,7 @@ class Host extends Component {
             </div>
 
             <div className='flexRow' style={{'width': '50%'}}>
-              <img alt='' className='reasonsImage' src={require('../Assets/Gear.png')}/>
+              <img alt='' className='reasonsImage' src={require('../../Assets/Gear.png')}/>
               <div className='flexVertical' style={{'marginLeft': 20}}>
                 <text className='textBigBold' style={{'marginTop': 30}}> Liability release </text>
                 <text style={{'minHeight': 110}}> We take full responsibility for any mishaps with cars listed and rented out through our service. List your space knowing you are safeguarded from liability </text>

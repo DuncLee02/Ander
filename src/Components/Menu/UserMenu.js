@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
+import ReactDOM from 'react-dom'
 import Modal from 'react-modal'
 import Global from '../../Globals.js'
+import { Link } from 'react-router-dom'
 
 import LeaseModal from '../AdminPages/CreateCar.js'
 import ReservationPopUp from '../Reservations/ReservationsPopUp.js'
+import './Menu.css'
 
 
 
@@ -24,36 +27,37 @@ class SearchMenu extends Component {
     this.openLeaseModal = this.openLeaseModal.bind(this)
     this.closeLeaseModal = this.closeLeaseModal.bind(this)
     this.showReservationPage = this.showReservationPage.bind(this)
+    this.closeReservationCallback = this.closeReservationCallback.bind(this)
   }
+
+  static contextTypes = {
+   router: React.PropTypes.object
+ }
 
   render() {
 
     return (
-      <div className ='flexVertical' >
-        <div className = 'searchMenu'>
-          <div className='searchAnderLogo'>
-            <img className='menuImg' src={require('../../Assets/Ander.png')} alt={'Menu'} />
+      <div>
+        <div className = 'menu'>
+
+
+          <div className='userMenuContainer'>
+            <text className='userMenuItem' onClick={this.showReservationPage}> Reservations </text>
+            {this.checkIfAdmin()}
+            <text className='userMenuItem' > Messages </text>
+
+            <Link to='/help' className='userMenuItem'>
+              <text> help </text>
+            </Link>
+
+            <text className='userMenuItem' onClick={this.signOut}> Log Out </text>
           </div>
-          <div className='searchMenuItem' >
-            <text className='textSmall' onClick={this.showReservationPage}> Reservations </text>
-          </div>
-          {this.checkIfAdmin()}
-          <div className='searchMenuItem' >
-            <text className='textSmall'> Messages </text>
-          </div>
-          <div className='searchMenuItem'>
-            <text className='textSmall'> help </text>
-          </div>
-          <div className='searchMenuItem'>
-            <text className='textSmall' onClick={this.signOut}> Log Out </text>
-          </div>
-          <div className='searchMenuItem' onClick={this.changeToInfoSection}>
-            <text className='textSmall'> Learn More </text>
-          </div>
+
         </div>
 
-        {this.state.reservationsVisible && <div className='reservationsContainer'>
-          <ReservationPopUp/>
+        {this.state.reservationsVisible && <div className='reservationsContainer' id='reservationsContainer'
+        style={{'height': Global.ReservedCars.length * 60, 'minHeight': 60}}>
+          <ReservationPopUp closeReservationCallback ={this.closeReservationCallback}/>
         </div> }
 
         <Modal
@@ -70,6 +74,12 @@ class SearchMenu extends Component {
     );
   }
 
+  closeReservationCallback() {
+    this.setState({
+      reservationsVisible: false
+    })
+  }
+
   showReservationPage() {
     this.setState({
       reservationsVisible: true
@@ -78,12 +88,10 @@ class SearchMenu extends Component {
 
   checkIfAdmin() {
     if (Global.User.admin) {
-      console.log(Global.User)
-      console.log(Global.User.admin)
+      // console.log(Global.User)
+      // console.log(Global.User.admin)
       return (
-        <div className='searchMenuItem' >
-          <text className='textSmall' onClick={this.openLeaseModal}> Create Car </text>
-        </div>
+          <text className='userMenuItem' onClick={this.openLeaseModal}> Create Car </text>
       )
     }
   }
@@ -105,7 +113,7 @@ class SearchMenu extends Component {
   }
 
   signOut() {
-    Global.user = null
+    Global.User = null
     this.props.signIn(false)
   }
 

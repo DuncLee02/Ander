@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom'
 
 class Rent extends Component {
 
@@ -21,27 +22,27 @@ class Rent extends Component {
 
         <div className='flexRow' style={{'justifyContent': 'space-around', 'textAlign': 'left', 'margin': 40, }}>
           <div className='flexRow' style={{'justifyContent': 'center', 'width': '33%'}}>
-            <img alt='' className='numbers' src={require('../Assets/LightBlueOne.png')}/>
+            <img alt='' className='numbers' src={require('../../Assets/LightBlueOne.png')}/>
             <div className='flexVertical' style={{'maxWidth': 300}}>
-              <img alt='' className='reasonsImage' src={require('../Assets/LightBlueCar.png')}/>
+              <img alt='' className='reasonsImage' src={require('../../Assets/LightBlueCar.png')}/>
               <text className='textBigBold'> Book </text>
               <text> Check out listings and choose a rental that fits your needs </text>
             </div>
           </div>
 
           <div className='flexRow' style={{'justifyContent': 'center', 'width': '33%'}}>
-            <img alt='' className='numbers' src={require('../Assets/LightBlueTwo.png')}/>
+            <img alt='' className='numbers' src={require('../../Assets/LightBlueTwo.png')}/>
             <div className='flexVertical' style={{'maxWidth': 300}}>
-              <img alt='' className='reasonsImage' src={require('../Assets/LightBlueLock.png')}/>
+              <img alt='' className='reasonsImage' src={require('../../Assets/LightBlueLock.png')}/>
               <text className='textBigBold'> Pickup </text>
               <text> Arrive at our designated parking space hosts and pickup the rental </text>
             </div>
           </div>
 
           <div className='flexRow' style={{'justifyContent': 'center', 'width': '33%'}}>
-            <img alt='' className='numbers' src={require('../Assets/LightBlueThree.png')}/>
+            <img alt='' className='numbers' src={require('../../Assets/LightBlueThree.png')}/>
             <div className='flexVertical' style={{'maxWidth': 300}}>
-              <img alt='' className='reasonsImage' src={require('../Assets/LightBlueKey.png')}/>
+              <img alt='' className='reasonsImage' src={require('../../Assets/LightBlueKey.png')}/>
               <text className='textBigBold'> Return </text>
               <text> Drive safe and return the vehicle in the condition requested by the owner </text>
             </div>
@@ -96,13 +97,15 @@ class Rent extends Component {
           <br/> <br/>
 
           <div className='flexRow'>
-            <img alt='' className='reasonsImage' src={require('../Assets/LightBlueVault.png')}/>
+            <img alt='' className='reasonsImage' src={require('../../Assets/LightBlueVault.png')}/>
             <div className='flexVertical' style={{'marginLeft': 20}}>
               <text className='textBigBold'> Drive knowing you are covered </text>
               <text> Our coverage insures you for personal liability up to $1 million. Learn more about this policy and terms by clicking below </text>
-              <button className='learnMoreButton' onClick={this.learnMorePolicies.bind(this)} style={{'marginTop':70, 'alignSelf': 'left', 'backgroundColor': '#2f78b2'}}>
-                <text className='learnMoreText'>  Learn More </text>
-              </button>
+              <Link to='/Trust'>
+                <button className='learnMoreButton' style={{'marginTop':70, 'alignSelf': 'left', 'backgroundColor': '#2f78b2'}}>
+                  <text className='learnMoreText'>  Learn More </text>
+                </button>
+              </Link>
             </div>
           </div>
 
@@ -112,10 +115,6 @@ class Rent extends Component {
       </div>
 
     );
-  }
-
-  learnMorePolicies() {
-    this.props.sectionChangeHandler('Trust')
   }
 
 }

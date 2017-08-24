@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom'
 import firebase from '../../../firebase.js'
+import { Link } from 'react-router-dom'
 
 import PlaceDropdown from './SearchPlacePicker.js'
 import CarTypeDropdown from './SearchCarTypePicker.js'
-
 
 import 'react-day-picker/lib/style.css';
 import DayPicker, { DateUtils } from 'react-day-picker';
 
 import RentalCar from '../../../Objects/RentalCar.js'
 import Global from '../../../Globals.js'
+
+import './SearchBar.css'
+import './Pickers.css'
 
 let dateFormat = require('dateformat');
 
@@ -29,6 +32,9 @@ class SearchBar extends Component {
       carInputText: 'car type',
       from: null,
       to: null,
+      link: "",
+
+      redirect: false,
     }
     this.pageClick = this.pageClick.bind(this)
     this.onAirportTextChange = this.onAirportTextChange.bind(this)
@@ -56,6 +62,7 @@ class SearchBar extends Component {
       from: null,
       to: null,
     })
+
   }
 
 
@@ -108,8 +115,23 @@ class SearchBar extends Component {
   render() {
     const { from, to} = this.state;
 
+    var searchLink = "/search?"
+    if (this.state.airportInputText != "airport") {
+      searchLink += "&airport=" + this.state.airportInputText
+    }
+    if (this.state.to != null) {
+      searchLink +=  "&to=" + dateFormat(this.state.to, "mm/dd/yyyy")
+    }
+    if (this.state.from != null) {
+      searchLink +=  "&from=" + dateFormat(this.state.from, "mm/dd/yyyy")
+    }
+    if (this.state.carInputText != "car type") {
+      searchLink +=  "&model=" + this.state.carInputText
+    }
+
     return (
       <div className='flexVertical'>
+
         <div className='flexRow' style={{'marginLeft': 30, 'marginRight': 30}}>
           <div className='searchInputContainer' style={{'borderTopLeftRadius': 5, 'borderBottomLeftRadius': 5 }}>
             <text className='searchText'> where? </text>
@@ -125,7 +147,9 @@ class SearchBar extends Component {
             <input className='searchInput' onChange={this.onCarTextChange} type='text' placeholder='check and see' onClick={this.showCarPicker} value={this.state.carInputText} readOnly/>
           </div>
           <div className='searchInputContainer' onClick={this.searchButtonClicked} style={{'borderLeft': 0, 'borderTopRightRadius': 5, 'borderBottomRightRadius': 5 , 'width': 100}}>
-            <button className='searchButton'> Search </button>
+            <Link to={searchLink} className='searchButton'>
+              Search
+            </Link>
           </div>
 
         </div>
@@ -155,39 +179,39 @@ class SearchBar extends Component {
     if (this.state.airportInputText == "airport") {
       return
     }
-    Global.RentalCars = []
-    console.log('pinging firebase')
-    console.log(Global.RentalCars.length)
-    firebase.database().ref("rentals/" + this.state.airportInputText ).on('value', (snap) => {
-      // get children as an array
-      // console.log(snap.val())
-      var items = [];
-      snap.forEach((child) => {
-        const airport = child.val().airport
-        const to = child.val().to
-        const from = child.val().from
-        const type = child.val().type
-        const uid = child.key
-        const year = child.val().year
-        const make = child.val().make
-        const model = child.val().model
 
-        const reservationArray = []
-        child.child('reservations').forEach((reservation) => {
-          const start = new Date( reservation.val().start)
-          const end = new Date(reservation.val().end)
-          const reservationJson = {startDate: start, endDate: end}
-          reservationArray.push(reservationJson)
-        })
-        const newCar = new RentalCar(airport, to, from, type, uid, year, make, model, reservationArray)
-
-        if (newCar.model != null) {
-          Global.RentalCars.push(newCar)
-        } 
-      });
-      console.log(Global.RentalCars.length)
-      this.props.updateResults()
-    })
+    // Global.RentalCars = []
+    // console.log('pinging firebase')
+    // console.log(Global.RentalCars.length)
+    // firebase.database().ref("rentals/" + this.state.airportInputText ).on('value', (snap) => {
+    //   console.log(snap.val())
+    //   var items = [];
+    //   snap.forEach((child) => {
+    //     const airport = child.val().airport
+    //     const to = child.val().to
+    //     const from = child.val().from
+    //     const type = child.val().type
+    //     const uid = child.key
+    //     const year = child.val().year
+    //     const make = child.val().make
+    //     const model = child.val().model
+    //
+    //     const reservationArray = []
+    //     child.child('reservations').forEach((reservation) => {
+    //       const start = new Date( reservation.val().start)
+    //       const end = new Date(reservation.val().end)
+    //       const reservationJson = {startDate: start, endDate: end}
+    //       reservationArray.push(reservationJson)
+    //     })
+    //     const newCar = new RentalCar(airport, to, from, type, uid, year, make, model, reservationArray)
+    //
+    //     if (newCar.model != null) {
+    //       Global.RentalCars.push(newCar)
+    //     }
+    //   });
+    //   console.log(Global.RentalCars.length)
+    //   this.props.updateResults()
+    // })
   }
 
   changeCarPickerText(text) {

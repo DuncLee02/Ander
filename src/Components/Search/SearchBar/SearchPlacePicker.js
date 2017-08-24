@@ -32,6 +32,10 @@ class PlaceDropdown extends Component {
     }.bind(this))
   }
 
+  if (this.querry.length == 0) {
+    return (<div/>)
+  }
+
 
     return (
       <div style={{'backgroundColor': 'white'}}>

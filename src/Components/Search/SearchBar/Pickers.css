@@ -1,0 +1,76 @@
+
+.searchAirportPickerContainer {
+  position: relative;
+  height: 0px;
+  width: 95%;
+  background-color: white;
+  margin-left: 30px;
+  flex-direction: column;
+  display: flex;
+  overflow: visible;
+}
+
+.airportPickerContainer {
+  position: relative;
+  background-color: white;
+  width: 100%;
+  flex-direction: column;
+  border-style: solid;
+  border-color: lightGrey;
+  border-radius: 5px;
+  display: flex;
+  z-index: 10;
+}
+
+.carPickerContainer {
+  height: 0px;
+  width: 500px;
+  margin-left: 58%;
+  flex-direction: column;
+  display: flex;
+  z-index: 10;
+  overflow: visible;
+}
+
+.airportPickerText {
+  text-align: left;
+  font-size: 25px;
+}
+
+.airportPickerText:hover {
+  background-color: lightGrey;
+}
+.airportPickerText:active {
+  background-color: #9cc1e2;
+}
+
+.modelOverallContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 500px;
+  height: 500px;
+  background-color: white;
+}
+
+.modelPickerImage {
+  height: 90px;
+  width: 90px;
+}
+
+.modelPickerContainer {
+    display: flex;
+    flex-direction: column;
+    height: 100px;
+    width: 150px;
+    border-style: solid;
+    border-color: lightGrey;
+    border-radius: 5px;
+    margin: 5px;
+    background-color: white;
+    z-index: 10;
+}
+
+.modelPickerContainer:hover {
+  background-color: lightGrey;
+}
