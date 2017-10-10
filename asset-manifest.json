@@ -1,14 +1,15 @@
 {
-  "main.css": "static/css/main.37619b76.css",
-  "main.css.map": "static/css/main.37619b76.css.map",
-  "main.js": "static/js/main.2d0dc88b.js",
-  "main.js.map": "static/js/main.2d0dc88b.js.map",
+  "main.css": "static/css/main.c5b9fb61.css",
+  "main.css.map": "static/css/main.c5b9fb61.css.map",
+  "main.js": "static/js/main.cc292e45.js",
+  "main.js.map": "static/js/main.cc292e45.js.map",
   "static/media/BullsEye.png": "static/media/BullsEye.4645a96c.png",
   "static/media/Coins.png": "static/media/Coins.e73ce510.png",
   "static/media/GoogleSymbol.png": "static/media/GoogleSymbol.342c1bfd.png",
   "static/media/Handshake.png": "static/media/Handshake.5c54954e.png",
   "static/media/People.png": "static/media/People.321787b9.png",
   "static/media/compact.png": "static/media/compact.51377fb6.png",
+  "static/media/exampleCar.png": "static/media/exampleCar.0507d6f9.png",
   "static/media/standard.png": "static/media/standard.ad1e64ad.png",
   "static/media/suv.png": "static/media/suv.bee8a4d1.png"
 }
